@@ -10,13 +10,12 @@ decisions according to this policy:
 - If this is a `SUCCEED`/`FAIL` decision, the agent chooses `SUCCEED` 80% of the
   time.
 
-This repository exists to be [forked](fork) by anyone developing their own
-Python agent.
+This repository exists to be forked by anyone developing their own Python agent.
 
 The [Docker image](Dockerfile) in this project defines a
 [container](https://www.docker.com/resources/what-container/) (basically a
 lightweight virtual machine) that has [Python](http://python.org), the
-[Tandem Tales Python client library](https://github/sgware/tt-client-python),
+[Tandem Tales Python client library](https://github.com/sgware/tt-client-python),
 and [the code for this agent](root/app) already installed. Docker makes it easy
 to package your agent so others can easily run it without worrying about
 dependencies, versions numbers, etc.
@@ -47,10 +46,7 @@ docker compose up
 ```
 Then open a web browser and go to [http://localhost](http://localhost) to see a
 local version of the Tandem Tales website running on your computer where you can
-play an interactive story with this agent. Because this local website uses a
-self-signed SSL certificate, you will probably see a warning about the website
-being insecure. You will need to dismiss this warning and trust the website's
-certificate to view it.
+play an interactive story with this agent.
 
 ## Make This Agent Your Own
 
@@ -72,13 +68,13 @@ name="random"
 You should also change the `title` and `description` variables to something that
 better fit your new agent.
 
-Now stop Docker (`ctrl+C` in the terminal, or use the stop button in the GUI).
-Rebuild your image and start it back up with one line:
+Now stop the container (`ctrl+C` in the terminal, or use the stop button in the
+GUI). Rebuild your image and start it back up with one line:
 ```
 docker compose up --build
 ```
-Go to [https://localhost/play] to see your new agent's title and description on
-the list of available agents.
+Go to [https://localhost/play](https://localhost/play) to see your new agent's
+title and description on the list of available agents.
 
 This random agent can play in any story world in either role (player or game
 master). Most agents aren't that flexible. Suppose your agent is only designed
@@ -176,9 +172,10 @@ If you need to clean up that resource before the agent stops, override
 If your agent can play in any story world, you might want to override the
 [`on_start`](https://sgware.github.io/tt-client-python/api/#tt.Client.on_start)
 method, which runs as soon as the agent's session starts and tells you all the
-details of the story world, your agent's role, and starting state of the world.
+details of the story world, your agent's role, and the starting state of the
+world.
 
-Got a resource that need to load once and share across all agents? Load it in
+Got a resource you need to load once and share across all agents? Load it in
 your factory's
 [`on_start`](https://sgware.github.io/tt-client-python/api/#tt.Factory.on_start)
 method and clean it up in
@@ -195,20 +192,20 @@ Docker makes it easy to add new files to your agent. If you look at the
 ```
 COPY ./root /
 ```
-That line copies all the files and directories in this project's `root` folder
-into the container's root `/` directory. So if you add the file
+That line copies all the files and directories in this project's [`root`](root)
+folder into the container's root `/` directory. So if you add the file
 `root/app/utility.py` to this project, you'll find it at `/app/utility.py` in
 the container. If you add `root/usr/local/bin/script.sh` to this project, you'll
 find it at `/usr/local/bin/script.sh` in the container.
 
 You can stop Docker and re-start it every time you make changes to the code, but
-that gets tedious after a while. When you launch this container using the Docker
-Compose commands shown above, it mounts the `root/app` directory as a
+that gets tedious. When you launch this container using the Docker Compose
+commands shown above, it mounts the [`root/app`](root/app) directory as a
 [volume](https://docs.docker.com/engine/storage/volumes/). That means everything
 in that directory is actually a local file on your computer. So you can edit
 `main.py` while the container is running and the container sees it instantly.
-Similarly, any files that get created (like the `status.json` from earlier) are
-on your computer and will stay there when the container stops.
+Similarly, any files that get created (like `status.json` from earlier) are on
+your computer and will stay there when the container stops.
 
 To make changes to the agent without stopping the container, start the project
 like this:
@@ -242,8 +239,9 @@ The code in this project is free and open source. It is released under the
 [GNU General Public License version 3.0](https://choosealicense.com/licenses/gpl-3.0/)
 (GPL 3.0). You are free to share and modify this software, even for commercial
 purposes, as long as you give credit to the original creators and you also
-release your modifications under the GPL 3.0 license. See the license file for
-details. The University of Kentucky retains all rights not specifically granted.
+release your modifications under the GPL 3.0 license. See the
+[license file](license.txt) for details. The University of Kentucky retains all
+rights not specifically granted.
 
 Docker, Docker Compose, and the software used in Docker containers have their
 own licenses that are not necessarily covered by GPL-3.0.
