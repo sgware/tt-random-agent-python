@@ -47,8 +47,8 @@ class RandomAgent(tt.Client):
         # 7. url: The URL of the Tandem Tales server.
         # 8. port: The network port of the Tandem Tales server.
         super().__init__('random', None, None, None, None, None, url, port)
-        self.id = RandomClient.next_id
-        RandomClient.next_id += 1
+        self.id = RandomAgent.next_id
+        RandomAgent.next_id += 1
     
     def __str__(self):
         return f"Random Agent {self.id}"
