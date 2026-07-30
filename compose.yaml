@@ -1,0 +1,56 @@
+#===============================================================================
+# Tandem Tales Agent (Python) Compose Configuration
+# 
+# Defines how to run a Tandem Tales web server and a Python agent that connects
+# to that server. This configuration is meant for development and testing.
+#===============================================================================
+services:
+  # Python agent configuration
+  agent:
+    image: tt-random-agent-python
+    build:
+      # Use the Dockerfile in this directory.
+      context: .
+      # Target the 'dev' stage inthe Dockerfile.
+      target: dev
+    # Wait for the server to start before starting this agent.
+    depends_on:
+      server:
+        condition: service_healthy
+    # Join the TT server network so they share the same 'localhost'.
+    network_mode: "service:server"
+    # Environment variables in this file will be defined at container run time.
+    env_file:
+      - .env
+    # Mount the agent source code as a volume so it can be edited at run time.
+    volumes:
+      - ./root/app:/app
+    # Make this container interactive when it starts.
+    stdin_open: true
+    tty: true
+  # Tandem Tales server configuration
+  server:
+    image: tt-web
+    # Configure the server's environment variables.
+    environment:
+      # Add an agent with these values to the database.
+      - agent_name=${name}
+      - agent_password=${password-}
+      - agent_title=${title-}
+      - agent_description=${description-}
+      # Set up the quick play link on the homepage.
+      - play_world=${world-}
+      - agent_role=${role-}
+      - play_partner=${name-}
+    # Allow the container to accept incoming network connections on these ports.
+    ports:
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
+      - "9005:9005" # Tandem Tales
+      - "9006:9006" # Tandem Tales (WebSockets)
+    # Detect when the server has started.
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q \"Server now listening\" /var/log/tt/log.txt && exit 0 || exit 1"]
+      interval: 500ms
+      timeout: 1s
+      retries: 10

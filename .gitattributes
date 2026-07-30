@@ -1,0 +1,2 @@
+# Do not convert shell scripts to Windows line endings on checkout.
+*.sh text eol=lf
