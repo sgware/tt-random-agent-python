@@ -2,8 +2,8 @@
 # Tandem Tales Agent (Python) Docker Image
 # 
 # This Dockerfile defines a container (a lightweight virtual machine) that
-# includes an operating system, the Python interpreter, and the source code for
-# a Tandem Tales agent.
+# includes an operating system, the Python interpreter, the Tandem Tales Python
+# Client library, and the source code for a Tandem Tales agent.
 #===============================================================================
 
 #-------------------------------------------------------------------------------
@@ -43,9 +43,8 @@ CMD ["python3", "main.py"]
 #-------------------------------------------------------------------------------
 FROM base AS dev
 
-# Copy the web server's self-signed public key so the agent can connect via SSL.
-COPY --from=tt-web /etc/ssl/certs/tt-fullchain.pem /etc/ssl/certs
-ENV SSL_CERT_FILE=/etc/ssl/certs/tt-fullchain.pem
+# Use the server's public key.
+ENV SSL_CERT_FILE=/etc/tt/certs/tt-fullchain.pem
 
 # Run the agent, but keep the bash shell open after it closes.
 CMD ["bash", "-c", "python3 main.py; bash"]
