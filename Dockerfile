@@ -30,9 +30,8 @@ COPY ./root /
 # Ensure Python prints output to the console.
 ENV PYTHONUNBUFFERED=1
 
-# Go to `/app` and run `main.py` when the container starts.
+# Set `/app` as the working directory.
 WORKDIR /app
-CMD ["python3", "main.py"]
 
 #-------------------------------------------------------------------------------
 # Development Phase
@@ -43,11 +42,8 @@ CMD ["python3", "main.py"]
 #-------------------------------------------------------------------------------
 FROM base AS dev
 
-# Use the server's public key.
-ENV SSL_CERT_FILE=/etc/tt/certs/tt-fullchain.pem
-
-# Run the agent, but keep the bash shell open after it closes.
-CMD ["bash", "-c", "python3 main.py; bash"]
+# Run the development version of the entrypoint script and keep the shell open.
+CMD ["sh", "-c", "trap 'exec bash' INT; /app/run.dev.sh; exec bash"]
 
 #-------------------------------------------------------------------------------
 # Production Phase
@@ -58,4 +54,5 @@ CMD ["bash", "-c", "python3 main.py; bash"]
 #-------------------------------------------------------------------------------
 FROM base AS prod
 
-# This section is empty, but it exists in case it is needed in the future.
+# Run the production version of the entrypoint script.
+CMD ["sh", "-c", "/app/run.prod.sh"]
