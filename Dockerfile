@@ -17,12 +17,15 @@ FROM python:3.14 AS base
 RUN apt update
 # Git downloads the Tandem Tales Python library.
 RUN apt install -y git
-# Clean up after installing software.
-RUN apt clean
-RUN rm -rf /var/lib/apt/lists/*
 
 # Install the Tandem Tales Python client library from GitHub.
 RUN pip install git+https://github.com/sgware/tt-client-python
+
+# Uninstall software and clean up.
+RUN apt purge -y git
+RUN apt autoremove -y
+RUN apt clean
+RUN rm -rf /var/lib/apt/lists/*
 
 # Copy the agent's files into the image.
 COPY ./root /
