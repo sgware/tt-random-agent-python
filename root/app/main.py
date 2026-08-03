@@ -113,7 +113,7 @@ class RandomAgent(tt.Client):
         Optional: Runs when the client stops normally by the `close` method or
         because the story ended. Does not run if client crashes.
         """
-        print(f"{self} has reached an ending: \"{ending['description']}\"")
+        print(f"{self} has closed.")
     
     def on_stop(self, message):
         """
