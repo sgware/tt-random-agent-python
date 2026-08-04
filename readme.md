@@ -1,7 +1,7 @@
 # Tandem Tales Random Agent (Python)
 
 This repository provides a simple example of how to create a
-[Tandem Tales](http://tandemtales.net) agent in Python that makes random
+[Tandem Tales](https:sgware.github.io/tt) agent in Python that makes random
 decisions according to this policy:
 
 - If this is a normal turn, the agent chooses to `PASS` control to its partner
@@ -21,8 +21,8 @@ to package your agent so others can easily run it without worrying about
 dependencies, versions numbers, etc.
 
 The [Docker Compose configuration](compose.yaml) makes it easy to run your agent
-along side a local instance of the
-[Tandem Tales web server](https://github.com/sgware/tt-web) so your agent has
+alongside a local instance of the
+[Tandem Tales Web Server](https://github.com/sgware/tt-web) so your agent has
 something to connect to and so you can test your agent in a web browser. Docker
 Compose handles generating the self-signed SSL certificates, the network
 configuration, setting up the Tandem Tales database, and running the web server
@@ -36,7 +36,7 @@ To download and run this agent, you need [Git](http://git-scm.com),
 Python or any libraries installed, because all of that is already in the Docker
 image.
 
-To download and run this agent along side a local instance of the Tandem Tales
+To download and run this agent alongside a local instance of the Tandem Tales
 web server, open a console and type:
 ```
 git clone https://github.com/sgware/tt-random-agent-python.git
@@ -88,7 +88,7 @@ And don't forget to change the [`.env`](.env) file to match:
 ```
 name="barista"
 title="The Barista"
-description="This agent plays as the barista in the Tutorial."
+description="This agent plays as the barista in the tutorial."
 world="tutorial"
 role="GAME_MASTER"
 ```
@@ -103,7 +103,9 @@ The only method a Tandem Tales
 implements is
 [`on_choice`](https://sgware.github.io/tt-client-python/api/#tt.Client.on_choice).
 Every time it is your agent's turn in the story, this method gets called. The
-`status` object has a ton of useful information in it, including:
+`status` object has
+[a ton of useful information](https://sgware.github.io/tt/protocol.html#status-object)
+in it, including:
 - `status['history']` has all the turns that have happened so far in the story.
 - `status['state']` tells you the current value of all the world's variables.
 - `status['descriptions']` has natural language descriptions of all the objects
@@ -224,6 +226,10 @@ computer. Now type this to start the factory back up:
 ```
 python3 main.py
 ```
+
+## Version History
+
+- 0.9.0: First public release.
 
 ## License
 
