@@ -78,7 +78,6 @@ class RandomAgent(tt.Client):
         """
         choices = status['choices']
         count = len(choices)
-        choice = 0;
         # If this is a proposal...
         if count == 2 and choices[0]['type'] == tt.SUCCEED and choices[1]['type'] == tt.FAIL:
             # Choose to succeed 80% of the time.
