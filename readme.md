@@ -227,6 +227,50 @@ computer. Now type this to start the factory back up:
 python3 main.py
 ```
 
+### Using the External API
+
+Does your agent need to use a Large Language Model (LLM)? Modern LLMs are too
+large to pack into a container and too slow to run without a high-end GPU.
+Tandem Tales agents come with a built-in way to use an external LLM for
+expensive operations like text embedding and chat completion, but first you
+will need an [API Key](https://en.wikipedia.org/wiki/API_key), which is like a
+user name and password all in one.
+
+Currently, Tandem Tales uses the [OpenRouter](https://openrouter.ai) API, which
+means you'll need to create an account on that website, follow the instructions
+to get an API key (which is a long string of random letters and numbers), and
+set up some way to pay for usage.
+
+You can tell your agent about your API key by setting the `apikey` environment
+variable in [`.env`](.env):
+```
+apikey=0123456789abcdefghijklmnopqrstuvwxyz
+```
+> [!WARNING]
+> Never share your API key! Never hard-code an API key into your agent's source
+> code. If you set your key in the `.env` file, never commit that file to a
+> public repository like GitHub, and never send the file to others. If you are
+> sending your agent to someone else to run, don't include your API key. They
+> should provide their own key.
+
+Now you can modify your `on_choice` method to use an LLM to make a random choice
+like this:
+```
+def on_choice(self, status):
+	count = len(status['choices'])
+	prompt = f"Choose a number between 0 and {count} inclusive."
+	response = self.external.complete(prompt)
+	return int(response)
+```
+
+But watch out! This code assumes you'll get just an interger back as the
+response, but you might get something like `"I choose 3"`. Your code will need
+to handle those cases.
+
+Check out the
+[Tandem Tales Python Client documentation](https://sgware.github.io/tt-client-python/api/#tt.ExternalAPI)
+to see all the options available in the external API.
+
 ## Version History
 
 - 0.9.0: First public release.
