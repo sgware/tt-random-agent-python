@@ -46,7 +46,10 @@ docker compose up
 ```
 Then open a web browser and go to [http://localhost](http://localhost) to see a
 local version of the Tandem Tales website running on your computer where you can
-play an interactive story with this agent.
+play an interactive story with this agent. You will likely see a security
+warning because the traffic is encrypted with a self-signed certificate. It is
+safe to ignore this warning because everything is running locally on your
+computer.
 
 ## Make This Agent Your Own
 
@@ -270,6 +273,22 @@ to handle those cases.
 Check out the
 [Tandem Tales Python Client documentation](https://sgware.github.io/tt-client-python/api/#tt.ExternalAPI)
 to see all the options available in the external API.
+
+### Publishing and Distributing Your Agent
+
+We recommend that you publish the source code and instructions for how to run
+your agent to a public repository like [GitHub.com](https://github.com).
+
+If you want to send your agent to someone else (for example, if you want to send
+it to the maintainers of [tandemtails.net](https://tandemtails.net)) you can
+package it into a file by going to the project's root directory and running:
+```
+docker save -o random.tar tt-random-agent-python:latest
+```
+This will create a file call `random.tar` that you can send to others. The file
+does not include the configuration information in [`compose.yaml`](compose.yaml)
+or [`.env`](.env), so make sure to document the settings and configuration
+needed to run your agent.
 
 ## Version History
 
