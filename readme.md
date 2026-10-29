@@ -280,7 +280,7 @@ We recommend that you publish the source code and instructions for how to run
 your agent to a public repository like [GitHub.com](https://github.com).
 
 If you want to send your agent to someone else (for example, if you want to send
-it to the maintainers of [tandemtails.net](https://tandemtails.net)) you can
+it to the maintainers of [tandemtales.net](https://tandemtales.net)) you can
 package it into a file by going to the project's root directory and running:
 ```
 docker save -o random.tar tt-random-agent-python:latest
