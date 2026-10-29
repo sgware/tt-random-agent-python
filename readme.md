@@ -287,8 +287,8 @@ docker save -o random.tar tt-random-agent-python:latest
 ```
 This will create a file call `random.tar` that you can send to others. The file
 does not include the configuration information in [`compose.yaml`](compose.yaml)
-or [`.env`](.env), so make sure to document the settings and configuration
-needed to run your agent.
+or [`.env`](.env), so make sure to document any settings needed to run your
+agent.
 
 ## Version History
 
@@ -297,7 +297,7 @@ needed to run your agent.
 ## License
 
 The Tandem Tales Random Agent (Python) was developed by Stephen G. Ware PhD.
-in the [Computer Science department](http://cs.uky.edu) at the
+in the [Computer Science Department](http://cs.uky.edu) at the
 [University of Kentucky](http://uky.edu). Development was sponsored in part by
 the [US National Science Foundation](http://www.nsf.gov),
 ([Grant #2145153](https://www.nsf.gov/awardsearch/show-award?AWD_ID=2145153))
