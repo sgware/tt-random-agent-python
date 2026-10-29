@@ -1,7 +1,7 @@
 # Tandem Tales Random Agent (Python)
 
 This repository provides a simple example of how to create a
-[Tandem Tales](https:sgware.github.io/tt) agent in Python that makes random
+[Tandem Tales](https://sgware.github.io/tt) agent in Python that makes random
 decisions according to this policy:
 
 - If this is a normal turn, the agent chooses to `PASS` control to its partner
@@ -18,7 +18,7 @@ lightweight virtual machine) that has [Python](http://python.org), the
 [Tandem Tales Python client library](https://github.com/sgware/tt-client-python),
 and [the code for this agent](root/app) already installed. Docker makes it easy
 to package your agent so others can easily run it without worrying about
-dependencies, versions numbers, etc.
+dependencies, version numbers, etc.
 
 The [Docker Compose configuration](compose.yaml) makes it easy to run your agent
 alongside a local instance of the
@@ -60,13 +60,13 @@ def __init__(self, url='localhost', port=tt.DEFAULT_PORT):
 ```
 Change the string `'random'` to your agent's new name.
 
-You also need to set this new name name in the environment variable file
+You also need to set this new name in the environment variable file
 [`.env`](.env). Change the line that looks like this:
 ```
 name="random"
 ```
 You should also change the `title` and `description` variables to something that
-better fit your new agent.
+better fits your new agent.
 
 Now stop the container (`ctrl+C` in the terminal, or use the stop button in the
 GUI). Rebuild your image and start it back up with one line:
@@ -100,7 +100,7 @@ fact, it's [just one file](root/app/main.py)!
 
 The only method a Tandem Tales
 [client](https://sgware.github.io/tt-client-python/api/#tt.Client) *needs* to
-implements is
+implement is
 [`on_choice`](https://sgware.github.io/tt-client-python/api/#tt.Client.on_choice).
 Every time it is your agent's turn in the story, this method gets called. The
 `status` object has
@@ -165,7 +165,7 @@ The only methods you *need* to implement are `on_choice` in your agent and
 `create` in your factory. But there's a bunch of other methods that get called
 at important moments in the agent's life that you might find helpful.
 
-For example, if your agent need to load some resource before it joins the
+For example, if your agent needs to load some resource before it joins the
 server, you could do that in the
 [`on_connect`](https://sgware.github.io/tt-client-python/api/#tt.Client.on_connect)
 method which runs after opening the connection but before waiting for a partner.
@@ -258,12 +258,12 @@ like this:
 ```
 def on_choice(self, status):
 	count = len(status['choices'])
-	prompt = f"Choose a number between 0 and {count} inclusive."
+	prompt = f"Choose a number between 0 and {count - 1} inclusive."
 	response = self.external.complete(prompt)
 	return int(response)
 ```
 
-But watch out! This code assumes you'll get just an interger back as the
+But watch out! This code assumes you'll get just an integer back as the
 response, but you might get something like `"I choose 3"`. Your code will need
 to handle those cases.
 

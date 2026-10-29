@@ -30,7 +30,7 @@ class RandomAgent(tt.Client):
     def __init__(self, url='localhost', port=tt.DEFAULT_PORT):
         # The arguments to `tt.Client` are:
         # 1. name: This agent's name. Hard-code this. Use up to 20 letters,
-        #    digits, and undersocres.
+        #    digits, and underscores.
         # 2. password: This should be left None so the Client will read it from
         #    the environment variables. Do not hard-code the password.
         # 3. world: The name of the world the agent wants to play in. Leave this
@@ -39,7 +39,7 @@ class RandomAgent(tt.Client):
         # 4. role: The role this client will have, which is either tt.PLAYER or
         #    tt.GM (for game master), or None for either role. Hard-code this if
         #    the agent is only designed to play as one role.
-        # 5. partner: The partner this agents wants to play with. Leave this
+        # 5. partner: The partner this agent wants to play with. Leave this
         #    None to play with any partner. Hard-code this if the agent is only
         #    designed to play with one type of partner.
         # 6. key: The API key used for the external API. This should be left
@@ -118,7 +118,7 @@ class RandomAgent(tt.Client):
         """
         Optional: Runs when the session stops.
         """
-        if message == None:
+        if message is None:
             print(f"{self} has stopped.")
         else:
             print(f"{self} has stopped: \"{message}\"")
