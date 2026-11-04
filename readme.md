@@ -1,6 +1,6 @@
 # Tandem Tales Random Agent (Python)
 
-https://github.com/user-attachments/assets/21d020af-e646-4e7f-bc70-e2d5fd5c6384
+https://github.com/user-attachments/assets/33015024-952c-4c9e-9170-94be8700263f
 
 This repository provides a simple example of how to create a
 [Tandem Tales](https://sgware.github.io/tt) agent in Python that makes random
